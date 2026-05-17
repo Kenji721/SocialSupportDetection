@@ -1,0 +1,31 @@
+# LoRA fine-tuning config for mlx-lm
+# Target: Qwen3.5 4B (4-bit quantized) on M4 Mac 16GB
+# 4B model (~2.5GB) leaves much more room for LoRA than 9B (~5.6GB)
+
+model: "mlx-community/Qwen3.5-4B-MLX-4bit"
+
+# LoRA — higher capacity than the 9B config
+num_layers: 16
+lora_parameters:
+  rank: 16
+  dropout: 0.05
+  scale: 32.0
+
+# Training
+train: true
+learning_rate: 2.0e-5
+batch_size: 1
+iters: 600
+val_batches: 25
+steps_per_report: 10
+steps_per_eval: 100
+save_every: 100
+max_seq_length: 2048     # Full prompt fits (~2200 tokens)
+adapter_path: "adapters/qwen3.5-4b-ssd"
+mask_prompt: true
+
+grad_checkpoint: true
+
+# Data — balanced EN+ES with full LLM Judge prompt
+data: "data/llm_finetune/combined"
+seed: 42

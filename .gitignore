@@ -1,0 +1,44 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+
+# Local environment and OS files
+.env
+.DS_Store
+AGENTS.md
+CLAUDE.md
+
+# Data and downloaded embeddings
+/data/
+
+# Trained models and experiment artifacts
+artifacts/
+adapters/
+task*_model/
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.joblib
+
+# Generated predictions, submissions, and logs
+predictions*.csv
+submissions/
+*.log
+
+# Paper templates and generated paper outputs
+CEURART/
+CEURART_corregido/
+CEURART.zip
+
+# Third-party papers kept for local reading
+docs/*.pdf
+
+docs/Daily note/*

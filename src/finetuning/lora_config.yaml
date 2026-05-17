@@ -1,0 +1,32 @@
+# LoRA fine-tuning config for mlx-lm
+# Target: Qwen3.5 9B (4-bit quantized) on M4 Mac 16GB
+
+# Model — pre-quantized MLX 4-bit version
+model: "mlx-community/Qwen3.5-9B-MLX-4bit"
+
+# LoRA parameters
+num_layers: 8            # Reduced to save memory
+lora_parameters:
+  rank: 4                # Reduced from 8 to save memory
+  dropout: 0.05
+  scale: 10.0
+
+# Training parameters
+train: true
+learning_rate: 1.0e-5
+batch_size: 1            # Keep at 1 for 16GB RAM
+iters: 1000              # Training iterations
+val_batches: 25          # Validation batches
+steps_per_report: 10
+steps_per_eval: 100
+save_every: 200
+max_seq_length: 512      # Aggressive truncation — most info is in short comment + label
+adapter_path: "adapters/qwen3.5-9b-ssd"
+mask_prompt: true        # Only compute loss on assistant response
+
+# Gradient checkpointing to save memory
+grad_checkpoint: true
+
+# Data
+data: "data/llm_finetune/combined"
+seed: 42
